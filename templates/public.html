@@ -17,26 +17,25 @@
       --card-bg: #ffffff;
       --border: #e5e7eb;
       --box-bg: #f1f5f9;
+      --input-bg: #f1f5f9;
+      --risk-high-bg: #fef2f2;
+      --risk-high-color: #dc2626;
+      --risk-medium-bg: #fffbeb;
+      --risk-medium-color: #d97706;
+      --risk-low-bg: #f0fdf4;
+      --risk-low-color: #16a34a;
     }
-    /* Reset & Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: linear-gradient(135deg, var(--bg), #eef2ff);
       color: var(--text);
       min-height: 100vh;
       line-height: 1.6;
+      padding-bottom: 2rem;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    /* Navbar Styles */
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    /* Navbar */
     .navbar {
       background: var(--card-bg);
       padding: 1rem;
@@ -57,9 +56,9 @@
     }
     .navbar a:hover {
       background: var(--primary);
-      color: white;
+      color: #fff;
     }
-    /* Header Styles */
+    /* Header */
     .header {
       text-align: center;
       padding: 4rem 2rem;
@@ -83,7 +82,7 @@
       max-width: 600px;
       margin: 0 auto;
     }
-    /* Card and Form Styles */
+    /* Card Styles */
     .card {
       background: var(--card-bg);
       padding: 2rem;
@@ -96,57 +95,20 @@
       display: flex;
       gap: 1rem;
       margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
-    input[type="file"] {
+    input[type="file"],
+    input[type="text"] {
       flex: 1;
       padding: 1rem;
       border: 2px solid var(--border);
       border-radius: 1rem;
       font-size: 1rem;
+      background: var(--input-bg);
     }
-    /* Company Search Form Styles */
-    .search-card label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .search-card input[type="text"] {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid var(--border);
-      border-radius: 1rem;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    /* Companies Involved / Extracted Company Names Buttons */
-    .companyBtn {
-      background: var(--primary-light);
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      margin: 0.25rem;
-      font-size: 1rem;
-      transition: background 0.3s ease;
-    }
-    .companyBtn:hover {
-      background: var(--primary);
-    }
-    /* Risk Report Box Styling */
-    .risk-report-box {
-      background: var(--box-bg);
-      border: 1px solid var(--border);
-      padding: 1rem;
-      margin: 0.5rem 0;
-      border-radius: 0.5rem;
-      white-space: pre-wrap;
-      line-height: 1.5;
-    }
-    /* Button Styling */
     button {
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
+      color: #fff;
       padding: 1rem 2rem;
       border: none;
       border-radius: 1rem;
@@ -159,45 +121,136 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(79,70,229,0.2);
     }
-    @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
-      }
-      .header {
-        padding: 2rem 1rem;
-      }
-      .header h1 {
-        font-size: 2.5rem;
-      }
-      .navbar {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .input-group {
-        flex-direction: column;
-      }
+    /* Progress & Spinner */
+    .progress-container {
+      display: none;
+      margin-top: 1rem;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     }
+    .progress-bar {
+      width: 100%;
+      height: 0.75rem;
+      background: var(--border);
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      transition: width 0.5s ease;
+    }
+    .progress-status {
+      text-align: center;
+      color: #6b7280;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Structured Risk Analysis Report Styles */
+    .risk-analysis-report { 
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      background: var(--box-bg);
+      margin-top: 1rem;
+    }
+    .risk-analysis-report h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    .risk-analysis-report .result {
+      margin-bottom: 1rem;
+    }
+    .risk-analysis-report .result h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+      color: var(--primary);
+    }
+    .risk-analysis-report .result p {
+      margin: 0.25rem 0;
+    }
+    .risk-analysis-report hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+    /* Company Search Styles */
+    #companyInputs .input-group {
+      margin-bottom: 1rem;
+    }
+    #companyInputs input[type="text"] {
+      flex: 1;
+    }
+    #companyInputs .removeCompany {
+      background: var(--error);
+      color: #fff;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .header { padding: 2rem 1rem; }
+      .header h1 { font-size: 2.5rem; }
+      .navbar { flex-direction: column; gap: 0.5rem; }
+      .input-group { flex-direction: column; }
+    }
+    /* Logo styles */
+    /* Increase the size of the logo */
+    .navbar .logo {
+      height: 80px;  /* Increase this value for a larger logo */
+      width: auto;   /* Maintains the aspect ratio */
+    }
+
+    /* Optionally, if the logo is in the hero section */
+    .hero-logo {
+      max-width: 250px; /* Increase this value as needed */
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Navbar -->
     <nav class="navbar">
+      <a href="/" class="logo-link">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="RiskRadar AI Logo" class="logo">
+      </a>
       <a href="/"><i class="fas fa-home"></i> Home</a>
       <a href="/media"><i class="fas fa-video"></i> Media Analysis</a>
       <a href="/public"><i class="fas fa-file-alt"></i> Public Records Analysis</a>
     </nav>
-    
     <!-- Page Header -->
     <div class="header">
       <h1>Public Records & Company Analysis</h1>
-      <p>Analyze documents for public risk and search company risk insights from recent news.</p>
+      <p>Analyze public cases such as bankruptcy, fraud, or controversy to get risk insights for one company.</p>
     </div>
     
-    <!-- Document Analysis Section (Risk Analysis Only) -->
+    <!-- Document Analysis Section -->
     <div class="card">
       <h2 style="margin-bottom: 1rem;">Document Analysis (Risk Analysis)</h2>
-      <!-- This form always performs risk analysis -->
       <form id="uploadForm">
         <div class="input-group">
           <input type="file" name="file" id="fileInput" required>
@@ -207,18 +260,24 @@
         </button>
       </form>
       <div id="uploadResults" style="margin-top: 1rem;"></div>
-      
-      <!-- Risk Reports Section -->
-      <div>
-        <h3>Risk Reports:</h3>
-        <div id="riskReports" style="margin-top: 1rem;"></div>
+      <!-- Document Progress Container -->
+      <div class="progress-container" id="docProgress">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <p class="progress-status">
+          <span class="spinner"></span>
+          Processing Risk Analysis...
+        </p>
       </div>
+      <!-- Final Risk Analysis Output (Structured) -->
+      <div id="riskReports"></div>
     </div>
     
     <!-- Company Risk Analysis Section -->
-    <div class="card search-card">
+    <div class="card">
       <h2 style="margin-bottom: 1rem;">Company Risk Analysis</h2>
-      <!-- Upload section for extracting company names only -->
+      <!-- Note: "No file chosen" appears when no file is selected -->
       <form id="companyUploadForm">
         <div class="input-group">
           <input type="file" name="companyFile" id="companyFileInput">
@@ -227,12 +286,20 @@
           <i class="fas fa-upload"></i> Extract Company Names
         </button>
       </form>
-      <!-- Extracted Company Names display -->
+      <!-- Company Extraction Progress -->
+      <div class="progress-container" id="companyExtractProgress">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <p class="progress-status">
+          <span class="spinner"></span>
+          Extracting Company Names...
+        </p>
+      </div>
       <div>
         <h3>Extracted Company Names:</h3>
         <div id="extractedCompanyList"></div>
       </div>
-      <!-- Company Search Inputs -->
       <form id="searchForm">
         <label for="company">Company Name</label>
         <div id="companyInputs">
@@ -246,6 +313,17 @@
           <i class="fas fa-search"></i> Search Companies
         </button>
       </form>
+      <!-- Company Search Progress -->
+      <div class="progress-container" id="companySearchProgress">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <p class="progress-status">
+          <span class="spinner"></span>
+          Searching Companies...
+        </p>
+      </div>
+      <!-- Structured Company Risk Search Results Output -->
       <div id="searchResults" style="margin-top: 1rem;"></div>
     </div>
     
@@ -259,26 +337,55 @@
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
-    // Utility function to clean up risk report text:
+    // Utility: Clean risk report text.
     function cleanRiskReport(text) {
-      return text
-        .replace(/[#*]/g, "")
-        // Remove extraneous commentary; adjust regex patterns as needed.
-        .replace(/Please provide more context or additional content from the transcript to identify further risk-related keywords or phrases\./ig, "")
-        .replace(/Without more context or detail from the transcript, these are general risk indicators pertaining to [^\.]+\./ig, "")
-        .replace(/\n\s*\n/g, "\n\n")
-        .trim();
+      return text.replace(/[#*]/g, "")
+                 .replace(/Please provide more context or additional content from the transcript to identify further risk-related keywords or phrases\./ig, "")
+                 .replace(/Without more context or detail from the transcript, these are general risk indicators pertaining to [^\.]+\./ig, "")
+                 .replace(/\n\s*\n/g, "\n\n")
+                 .trim();
+    }
+    
+    // Function to format the risk analysis report into structured HTML,
+    // skipping any recommendations.
+    function formatRiskReport(report) {
+      // Split the report text on '---' markers, remove empty sections, and filter out sections starting with "Recommendations"
+      const sections = report.split('---').map(s => s.trim()).filter(s => s && !/^recommendations/i.test(s));
+      let output = '<div class="risk-analysis-report">';
+      sections.forEach(section => {
+        output += '<div class="result">' + section.replace(/\n/g, '<br>') + '</div><hr>';
+      });
+      output += '</div>';
+      return output;
+    }
+    
+    // Function to format company risk search results into structured HTML.
+    // Assumes the returned text contains result markers like "Result 1:", etc.
+    function formatCompanyRiskReport(report) {
+      // Use a regular expression to split on markers (while preserving them)
+      let results = report.split(/(?=Result\s+\d+:)/);
+      let output = '<div class="risk-analysis-report">';
+      results.forEach(r => {
+        if (r.trim()) {
+          output += '<div class="result">' + r.trim().replace(/\n/g, '<br>') + '</div><hr>';
+        }
+      });
+      output += '</div>';
+      return output;
     }
     
     $(document).ready(function() {
       /* ------------------------------
-         Document Analysis Form (Risk Analysis Only)
+         Document Analysis Form (Risk Analysis)
          ------------------------------ */
       $('#uploadForm').on('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(this);
-        // Force analysisType to "risk"
-        formData.append('analysisType', 'risk');
+        // analysisType 'risk_single' for public record risk analysis
+        formData.append('analysisType', 'risk_single');
+        // Show document progress indicator
+        $('#docProgress').show();
+        $('#docProgress .progress-status').html('<span class="spinner"></span> Processing Risk Analysis...');
         $.ajax({
           url: '/public',
           type: 'POST',
@@ -286,17 +393,18 @@
           contentType: false,
           processData: false,
           success: function(response) {
-            // Display the summary directly (expected to be solely the risk details)
             $('#uploadResults').html(response.summary);
-            // Display the risk reports.
-            const riskReportsHtml = response.risk_reports.map(report => {
-              const cleaned = cleanRiskReport(report);
-              return `<div class="risk-report-box">${cleaned}</div>`;
-            }).join('');
-            $('#riskReports').html(riskReportsHtml);
+            if (response.risk_report) {
+              const cleaned = cleanRiskReport(response.risk_report);
+              const formattedReport = formatRiskReport(cleaned);
+              $('#riskReports').html(formattedReport);
+            }
           },
           error: function(xhr) {
             $('#uploadResults').html(xhr.responseJSON.error);
+          },
+          complete: function() {
+            $('#docProgress').hide();
           }
         });
       });
@@ -310,9 +418,10 @@
           alert("Please select a file first.");
           return;
         }
+        $('#companyExtractProgress').show();
+        $('#companyExtractProgress .progress-status').html('<span class="spinner"></span> Extracting Company Names...');
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
-        // Force analysisType to "company" so risk analysis is not performed.
         formData.append('analysisType', 'company');
         $.ajax({
           url: '/public',
@@ -321,10 +430,9 @@
           contentType: false,
           processData: false,
           success: function(response) {
-            // Update the extracted company list with the returned company names
             const companies = response.company_names;
             if (companies && companies.length > 0) {
-              let companyButtons = companies.map(company => 
+              let companyButtons = companies.map(company =>
                 `<button type="button" class="companyBtn">${company}</button>`
               ).join(' ');
               $('#extractedCompanyList').html(companyButtons);
@@ -334,6 +442,9 @@
           },
           error: function(xhr) {
             alert("Error: " + xhr.responseJSON.error);
+          },
+          complete: function() {
+            $('#companyExtractProgress').hide();
           }
         });
       });
@@ -358,30 +469,35 @@
         e.preventDefault();
         const companyNames = $('.company').map(function() {
           return $(this).val().trim();
-        }).get().filter(function(name) {
-          return name.length > 0;
-        });
+        }).get().filter(function(name) { return name.length > 0; });
         if (companyNames.length === 0) {
           alert("Please enter at least one company name.");
           return;
         }
+        $('#companySearchProgress').show();
+        $('#companySearchProgress .progress-status').html('<span class="spinner"></span> Searching Companies...');
         $.ajax({
           url: '/company',
           type: 'POST',
           data: JSON.stringify({ companies: companyNames }),
           contentType: 'application/json',
           success: function(response) {
-            const riskReportsHtml = response.risk_reports.map(report => `<div class="risk-report-box">${cleanRiskReport(report.risk_report)}</div>`).join('');
+            const riskReportsHtml = response.risk_reports.map(report => {
+              const cleaned = cleanRiskReport(report.risk_report);
+              // Format the result into structured HTML.
+              return formatCompanyRiskReport(cleaned);
+            }).join('');
             $('#searchResults').html(riskReportsHtml);
           },
           error: function(xhr) {
             alert("Error: " + xhr.responseJSON.error);
+          },
+          complete: function() {
+            $('#companySearchProgress').hide();
           }
         });
       });
       
-      // When a company button (from extraction or document analysis) is clicked,
-      // try to fill an empty company text box.
       $(document).on('click', '.companyBtn', function() {
         const companyName = $(this).text().trim();
         let emptyFound = false;
@@ -405,14 +521,26 @@
         $(this).text($(this).text() === 'Show More' ? 'Show Less' : 'Show More');
       });
       
-      /* Optional: Log selected file name for document analysis */
       $('#fileInput').on('change', function(e) {
         const fileName = e.target.files[0]?.name;
-        if (fileName) {
-          console.log('Selected file:', fileName);
-        }
+        if (fileName) { console.log('Selected file:', fileName); }
       });
     });
+    
+    // Risk calculation helper functions.
+    function calculateRiskLevel(report) {
+      const riskKeywords = {
+        high: ['bankruptcy', 'lawsuit', 'fraud', 'investigation', 'scandal'],
+        medium: ['controversy', 'dispute', 'allegation', 'concern']
+      };
+      const reportLower = report.toLowerCase();
+      if (riskKeywords.high.some(keyword => reportLower.includes(keyword))) { return 'High'; }
+      else if (riskKeywords.medium.some(keyword => reportLower.includes(keyword))) { return 'Medium'; }
+      return 'Low';
+    }
+    function getRiskClass(level) {
+      return { 'High': 'risk-high', 'Medium': 'risk-medium', 'Low': 'risk-low' }[level];
+    }
   </script>
 </body>
 </html>
