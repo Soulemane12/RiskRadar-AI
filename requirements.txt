@@ -2,7 +2,7 @@ Flask
 python-dotenv
 requests
 yt-dlp
-moviepy
+moviepy==1.0.3
 PyMuPDF
 chardet
 julep
