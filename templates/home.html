@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiskRadar AI - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark: #3730a3;
+            --success: #22c55e;
+            --error: #ef4444;
+            --text: #1f2937;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--bg), #eef2ff);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background: var(--card-bg);
+            padding: 1rem;
+            margin-bottom: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border-radius: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.125rem;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .secondary-button {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .secondary-button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/media"><i class="fas fa-video"></i> Media Analysis</a>
+            <a href="/public"><i class="fas fa-file-alt"></i> Public Records</a>
+        </nav>
+
+        <div class="hero">
+            <h1>RiskRadar AI</h1>
+            <p>Proactively scanning risks for safer renewable energy ventures through advanced AI analysis of media and public records.</p>
+            <div class="cta-buttons">
+                <a href="/media" class="cta-button primary-button">
+                    <i class="fas fa-video"></i>
+                    Media Analysis
+                </a>
+                <a href="/public" class="cta-button secondary-button">
+                    <i class="fas fa-file-alt"></i>
+                    Public Records
+                </a>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-robot feature-icon"></i>
+                <h3 class="feature-title">AI-Powered Analysis</h3>
+                <p>Advanced machine learning algorithms analyze content for potential risks and opportunities.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3 class="feature-title">Risk Assessment</h3>
+                <p>Comprehensive risk evaluation across multiple data sources and platforms.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line feature-icon"></i>
+                <h3 class="feature-title">Real-time Monitoring</h3>
+                <p>Continuous monitoring and instant alerts for emerging risks and trends.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
