@@ -1,7 +1,6 @@
 # RiskRadar AI
 
-![RiskRadar AI Banner](![Screenshot 2025-01-19 120207](https://github.com/user-attachments/assets/7b32b1a5-6102-43e4-b9a1-1439054ba7ac)
-) <!-- Replace with your project banner image -->
+![RiskRadar AI Banner]
 
 **RiskRadar AI** is an open-source platform designed to accelerate due diligence processes for renewable energy projects by leveraging AI to identify and mitigate counterparty risks. It automates the analysis of media sentiment, public records, and financial stability, helping stakeholders make informed decisions.
 
