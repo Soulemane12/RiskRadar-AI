@@ -6,7 +6,6 @@ from main import (
     upload_file,
     request_transcript,
     poll_transcript,
-    save_transcript_text,
     analyze_risks_with_ai,
     analyze_public_records,
     search_company_news,
@@ -20,6 +19,23 @@ import time
 import requests
 from dotenv import load_dotenv
 from julep import Julep
+
+# --- Updated function to ensure directory exists before saving the transcript ---
+def save_transcript_text(transcript_json, output_textfile="results/transcript.txt"):
+    # Ensure the directory exists
+    directory = os.path.dirname(output_textfile)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    
+    with open(output_textfile, 'w', encoding='utf-8') as f:
+        f.write("Full Transcript:\n")
+        f.write(transcript_json.get("text", "") + "\n\n")
+        if transcript_json.get("utterances"):
+            f.write("Speaker Breakdown:\n")
+            for utterance in transcript_json["utterances"]:
+                f.write(f"Speaker {utterance.get('speaker', 'N/A')}: {utterance.get('text', '')}\n")
+    print(f"Transcript saved to {output_textfile}")
+# --- End updated function ---
 
 app = Flask(__name__)
 progress_status = {}
